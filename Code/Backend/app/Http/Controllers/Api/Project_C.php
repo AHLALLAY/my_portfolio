@@ -15,20 +15,11 @@ class Project_C extends Controller
     // CRUD
     public function getProjects(){ 
         try{
-            $project = $this->project_S->getProjects();
-            if ($project){
-                return response()->json([
-                    'message' => 'Projects Found',
-                    'project' => $project,
-                    'status' => 'success'
-                ],200);
-            }else{
-                return response()->json([
-                    'message' => 'Project found',
-                    'project' => 'no data found',
-                    'status' => 'success'
-                ],200);
-            }
+            return response()->json([
+                'message' => 'Projects Found',
+                'project' => $this->project_S->getProjects(),
+                'status' => 'success'
+            ],200);
         }catch(\Exception $e){
             return response()->json([
                 'message' => 'Unexpected error',
