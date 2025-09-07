@@ -60,8 +60,8 @@ class Skill_C extends Controller
             $created_skill =  $this->skill_S->createSkill($skill->validated());
             if($created_skill){
                 return response()->json([
-                    'message' => 'Project created with succive',
-                    'project' => $created_skill,
+                    'message' => 'Skill created with succive',
+                    'skill' => $created_skill,
                     'status' => 'success'
                 ],201);
             }
@@ -84,7 +84,7 @@ class Skill_C extends Controller
             $skill = $this->skill_S->editeSkill($skillId);
             if($skill){
                 return response()->json([
-                    'message' => 'Project Modified',
+                    'message' => 'Skill Modified',
                     'skill' => $skill,
                     'status' => 'success'
                 ],200);
@@ -102,7 +102,7 @@ class Skill_C extends Controller
             $skill = $this->skill_S->deleteSkill($skillId);
             if($skill){
                 return response()->json([
-                    'message' => 'Project deleted',
+                    'message' => 'Skill deleted',
                     'skill' => $skill,
                     'status' => 'success'
                 ],200);
@@ -121,24 +121,8 @@ class Skill_C extends Controller
         try{
             $total = $this->skill_S->skillTotal();
             return response()->json([
-                'message' => 'Project deleted',
+                'message' => 'Skills Total Counted',
                 'skill total' => $total,
-                'status' => 'success'
-            ],200);
-        }catch(\Exception $e){
-            return response()->json([
-                'message' => 'Unexpected error',
-                'error' => $e->getMessage(),
-                'status' => 'failed'
-            ],500);
-        }
-    }
-    public function skillArchive(){
-        try{
-            $total = $this->skill_S->skillArchive();
-            return response()->json([
-                'message' => 'Project deleted',
-                'skill archive' => $total,
                 'status' => 'success'
             ],200);
         }catch(\Exception $e){

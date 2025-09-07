@@ -117,24 +117,8 @@ class Project_C extends Controller
         try{
             $total = $this->project_S->projectTotal();
             return response()->json([
-                'message' => 'Project deleted',
+                'message' => 'Projects Total counted',
                 'project total' => $total,
-                'status' => 'success'
-            ],200);
-        }catch(\Exception $e){
-            return response()->json([
-                'message' => 'Unexpected error',
-                'error' => $e->getMessage(),
-                'status' => 'failed'
-            ],500);
-        }
-    }
-    public function projectArchive(){ 
-        try{
-            $total = $this->project_S->projectArchive();
-            return response()->json([
-                'message' => 'Project deleted',
-                'project archive' => $total,
                 'status' => 'success'
             ],200);
         }catch(\Exception $e){

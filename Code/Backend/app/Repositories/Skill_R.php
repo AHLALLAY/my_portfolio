@@ -14,5 +14,4 @@ class Skill_R implements Skill_I
 
     // STATS
     public function skillTotal(){}
-    public function skillArchive(){}
 }

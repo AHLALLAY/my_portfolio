@@ -41,6 +41,11 @@ class Project_R implements Project_I
     }
 
     // STATUS
-    public function projectTotal(){}
-    public function projectArchive(){}
+    public function projectTotal(){
+        try{
+            return Project::all()->count();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
 }

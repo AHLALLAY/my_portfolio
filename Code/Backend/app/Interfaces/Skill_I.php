@@ -13,5 +13,4 @@ interface Skill_I
 
     // STATS
     public function skillTotal();
-    public function skillArchive();
 }

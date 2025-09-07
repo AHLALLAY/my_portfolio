@@ -13,5 +13,4 @@ interface Project_I
 
     // STATS
     public function projectTotal();
-    public function projectArchive();
 }
