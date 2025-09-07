@@ -75,13 +75,13 @@ class Project_C extends Controller
             ],500);
         }
     }
-    public function editeProject($projectId){ 
+    public function editeProject($projectId,ProjectRequest $new_data){ 
         try{ 
-            $project = $this->project_S->editeProject($projectId);
+            $project = $this->project_S->editeProject($projectId,$new_data->validated());
             if($project){
                 return response()->json([
                     'message' => 'Project Modified',
-                    'project' => $project,
+                    'project' => $new_data,
                     'status' => 'success'
                 ],200);
             }

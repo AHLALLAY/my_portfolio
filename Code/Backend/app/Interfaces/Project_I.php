@@ -8,7 +8,7 @@ interface Project_I
     public function getProjects();
     public function getProject($id);
     public function createProject($project);
-    public function editeProject($projectId);
+    public function editeProject($projectId, $new_data);
     public function deleteProject($projectId);
 
     // STATS

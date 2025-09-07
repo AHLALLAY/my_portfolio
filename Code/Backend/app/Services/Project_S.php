@@ -13,7 +13,7 @@ class Project_S
     public function getProjects(){ return $this->project_R->getProjects(); }
     public function getProject($id){ return $this->project_R->getProject($id); }
     public function createProject($project){ return $this->project_R->createProject($project); }
-    public function editeProject($projectId){ return $this->project_R->editeProject($projectId); }
+    public function editeProject($projectId, $new_data){ return $this->project_R->editeProject($projectId, $new_data); }
     public function deleteProject($projectId){ return $this->project_R->deleteProject($projectId); }
 
     // STATUS

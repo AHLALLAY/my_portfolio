@@ -28,7 +28,7 @@ class Project_R implements Project_I
             throw $e;
         }
     }
-    public function editeProject($projectId){}
+    public function editeProject($projectId, $new_data){}
     public function deleteProject($projectId){}
 
     // STATUS
