@@ -14,7 +14,13 @@ class Project_R implements Project_I
             throw $e;
         }
     }
-    public function getProject($id){}
+    public function getProject($id){
+        try{
+            return Project::findOrFail($id);
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
     public function createProject($project){}
     public function editeProject($projectId){}
     public function deleteProject($projectId){}
