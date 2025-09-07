@@ -112,6 +112,59 @@ class Project_C extends Controller
         }
     }
 
+    // RELATIONS
+    public function attachSkills($projectId, Request $request){
+        try{
+            $skillIds = $request->input('skill_ids', []);
+            $result = $this->project_S->attachSkills($projectId, $skillIds);
+            return response()->json([
+                'message' => 'Skills attached to project',
+                'project' => $result,
+                'status' => 'success'
+            ],200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Unexpected error',
+                'error' => $e->getMessage(),
+                'status' => 'failed'
+            ],500);
+        }
+    }
+    
+    public function detachSkill($projectId, $skillId){
+        try{
+            $result = $this->project_S->detachSkill($projectId, $skillId);
+            return response()->json([
+                'message' => 'Skill detached from project',
+                'project' => $result,
+                'status' => 'success'
+            ],200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Unexpected error',
+                'error' => $e->getMessage(),
+                'status' => 'failed'
+            ],500);
+        }
+    }
+    
+    public function getProjectSkills($projectId){
+        try{
+            $skills = $this->project_S->getProjectSkills($projectId);
+            return response()->json([
+                'message' => 'Project skills found',
+                'skills' => $skills,
+                'status' => 'success'
+            ],200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Unexpected error',
+                'error' => $e->getMessage(),
+                'status' => 'failed'
+            ],500);
+        }
+    }
+
     // STATUS
     public function projectTotal(){ 
         try{

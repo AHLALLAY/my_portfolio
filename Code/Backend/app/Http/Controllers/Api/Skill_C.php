@@ -79,9 +79,9 @@ class Skill_C extends Controller
             ],500);
         }
     }
-    public function editeSkill($skillId){
+    public function editeSkill($skillId, SkillRequest $new_data){
         try{ 
-            $skill = $this->skill_S->editeSkill($skillId);
+            $skill = $this->skill_S->editeSkill($skillId, $new_data->validated());
             if($skill){
                 return response()->json([
                     'message' => 'Skill Modified',

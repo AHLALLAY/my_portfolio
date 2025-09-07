@@ -13,7 +13,7 @@ class Skill_S
     public function getSkills(){return $this->skill_R->getSkills() ;}
     public function getSkill($skillId){return $this->skill_R->getSkill($skillId) ;}
     public function createSkill($skill){return $this->skill_R->createSkill($skill) ;}
-    public function editeSkill($skillId){return $this->skill_R->editeSkill($skillId) ;}
+    public function editeSkill($skillId, $new_skill){return $this->skill_R->editeSkill($skillId, $new_skill) ;}
     public function deleteSkill($skillId){return $this->skill_R->deleteSkill($skillId) ;}
 
     // STATS

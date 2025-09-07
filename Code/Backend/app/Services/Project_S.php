@@ -16,6 +16,11 @@ class Project_S
     public function editeProject($projectId, $new_data){ return $this->project_R->editeProject($projectId, $new_data); }
     public function deleteProject($projectId){ return $this->project_R->deleteProject($projectId); }
 
+    // RELATIONS
+    public function attachSkills($projectId, $skillIds){ return $this->project_R->attachSkills($projectId, $skillIds); }
+    public function detachSkill($projectId, $skillId){ return $this->project_R->detachSkill($projectId, $skillId); }
+    public function getProjectSkills($projectId){ return $this->project_R->getProjectSkills($projectId); }
+
     // STATUS
     public function projectTotal(){ return $this->project_R->projectTotal(); }
     public function projectArchive(){ return $this->project_R->projectArchive(); }
