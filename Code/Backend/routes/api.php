@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Project_C;
+use App\Http\Controllers\Api\Skill_C;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,16 @@ Route::controller(Project_C::class)->group(function(){
     
     // STATS
     Route::get('/projects/total', 'projectTotal');
-    Route::get('/projects/archive/total', 'projectArchive');
+});
+
+Route::controller(Skill_C::class)->group(function(){
+    // CRUD
+    Route::get('/skills', 'getSkills');
+    Route::get('/skill/{id}', 'getSkill');
+    Route::post('/skills', 'createSkill');
+    Route::put('/skill/{id}', 'editeSkill');
+    Route::delete('/skill/{id}', 'deleteSkill');
+    
+    // STATS
+    Route::get('/skills/total', 'skillTotal');
 });
