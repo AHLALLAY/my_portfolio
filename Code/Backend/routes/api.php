@@ -15,6 +15,11 @@ Route::controller(Project_C::class)->group(function(){
     Route::put('/project/{id}', 'editeProject');
     Route::delete('/project/{id}', 'deleteProject');
     
+    // RELATIONS
+    Route::post('/project/{id}/skills', 'attachSkills');
+    Route::delete('/project/{id}/skills/{skillId}', 'detachSkill');
+    Route::get('/project/{id}/skills', 'getProjectSkills');
+    
     // STATS
     Route::get('/projects/total', 'projectTotal');
 });

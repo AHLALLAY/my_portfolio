@@ -11,6 +11,11 @@ interface Project_I
     public function editeProject($projectId, $new_data);
     public function deleteProject($projectId);
 
+    // RELATIONS
+    public function attachSkills($projectId, $skillIds);
+    public function detachSkill($projectId, $skillId);
+    public function getProjectSkills($projectId);
+
     // STATS
     public function projectTotal();
 }
