@@ -9,14 +9,14 @@ class Skill_R implements Skill_I
     // CRUD
     public function getSkills(){
         try{
-            return Skill::all();
+            return Skill::with('projects')->orderBy('name')->get();
         }catch(\Exception $e){
             throw $e;
         }
     }
     public function getSkill($skillId){
         try{
-            return Skill::findOrFail($skillId);
+            return Skill::with('projects')->findOrFail($skillId);
         }catch(\Exception $e){
             throw $e;
         }
@@ -28,7 +28,15 @@ class Skill_R implements Skill_I
             throw $e;
         }
     }
-    public function editeSkill($skillId, $new_skill){}
+    public function editeSkill($skillId, $new_skill){
+        try{
+            $skill = Skill::findOrFail($skillId);
+            $skill->update($new_skill);
+            return $skill->load('projects');
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
     public function deleteSkill($skillId){
         try{
             $skill = Skill::findOrFail($skillId);
