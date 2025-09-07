@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Services\Project_S;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 
 class Project_C extends Controller
@@ -31,13 +32,17 @@ class Project_C extends Controller
     public function getProject($id){ 
         try{
             $project = $this->project_S->getProject($id); 
-            if($project){
-                return response()->json([
-                    'message' => 'Project found',
-                    'project' => $project,
-                    'status' => 'success'
-                ],200);
-            }
+            return response()->json([
+                'message' => 'Project found',
+                'project' => $project,
+                'status' => 'success'
+            ],200);
+        }catch(ModelNotFoundException $e){
+            return response()->json([
+                'message' => 'Project not found',
+                'error' => $e->getMessage(),
+                'status' => 'failed'
+            ],404);            
         }catch(\Exception $e){
             return response()->json([
                 'message' => 'Unexpected error',
