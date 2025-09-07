@@ -29,7 +29,16 @@ class Project_R implements Project_I
         }
     }
     public function editeProject($projectId, $new_data){}
-    public function deleteProject($projectId){}
+    public function deleteProject($projectId){
+        try{
+            $project = Project::findOrFail($projectId);
+            if($project){
+                return $project->delete();
+            }
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
 
     // STATUS
     public function projectTotal(){}

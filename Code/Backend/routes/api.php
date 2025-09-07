@@ -12,7 +12,7 @@ Route::controller(Project_C::class)->group(function(){
     Route::get('/project/{id}', 'getProject');
     Route::post('/projects', 'createProject');
     Route::put('/project/{id}', 'editeProject');
-    Route::delete('/project/{id}', 'deleteProjects');
+    Route::delete('/project/{id}', 'deleteProject');
     
     // STATS
     Route::get('/projects/total', 'projectTotal');
