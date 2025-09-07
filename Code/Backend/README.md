@@ -1,61 +1,284 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Portfolio Backend API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API REST pour un portfolio développeur construit avec Laravel 12 et Laravel Sanctum.
 
-## About Laravel
+## 📋 Description
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Ce projet est un backend API pour un portfolio développeur qui permet d'afficher et de gérer des projets et compétences. L'API est conçue pour être utilisée avec un frontend Vue.js.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🏗️ Architecture
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Le projet utilise une architecture en couches avec le pattern Repository/Service :
 
-## Learning Laravel
+```
+Interface → Repository → Service → Controller
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 📁 Structure des dossiers
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+app/
+├── Http/
+│   ├── Controllers/Api/     # Contrôleurs API
+│   └── Requests/            # Classes de validation
+├── Interfaces/              # Interfaces des repositories
+├── Models/                  # Modèles Eloquent
+├── Repositories/            # Implémentation des repositories
+├── Services/                # Couche métier
+└── Providers/               # Service providers
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🗄️ Base de données
 
-## Laravel Sponsors
+### Tables principales
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **`users`** - Utilisateurs (authentification)
+- **`projects`** - Projets du portfolio
+- **`skills`** - Compétences (hard/soft skills)
+- **`project_skills`** - Table de liaison (many-to-many)
 
-### Premium Partners
+### Relations
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- `Project` ↔ `Skill` (many-to-many via `project_skills`)
+- `User` (authentification indépendante)
 
-## Contributing
+## 🛠️ Technologies utilisées
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Laravel 12** - Framework PHP
+- **Laravel Sanctum** - Authentification API
+- **SQLite** - Base de données
+- **PHP 8.2+** - Version PHP
 
-## Code of Conduct
+## 🚀 Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Prérequis
 
-## Security Vulnerabilities
+- PHP 8.2 ou supérieur
+- Composer
+- Node.js (pour les assets)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Étapes d'installation
 
-## License
+1. **Cloner le projet**
+```bash
+git clone <repository-url>
+cd Code/Backend
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Installer les dépendances**
+```bash
+composer install
+npm install
+```
+
+3. **Configuration de l'environnement**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. **Base de données**
+```bash
+# La base SQLite est déjà créée
+php artisan migrate
+php artisan db:seed
+```
+
+5. **Démarrer le serveur**
+```bash
+php artisan serve
+```
+
+L'API sera disponible sur `http://localhost:8000`
+
+## 📚 Documentation API
+
+### 🔐 Authentification
+
+#### Connexion
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+    "email": "abderrahmanahlalay76@gmail.com",
+    "password": "wxcvbn@@@@0000"
+}
+```
+
+#### Inscription
+```http
+POST /api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Nom Utilisateur",
+    "email": "email@example.com",
+    "password": "motdepasse",
+    "password_confirmation": "motdepasse"
+}
+```
+
+#### Déconnexion
+```http
+POST /api/auth/logout
+Authorization: Bearer {token}
+```
+
+### 📊 Projets (Routes publiques)
+
+#### Liste des projets
+```http
+GET /api/public/projects
+```
+
+#### Détail d'un projet
+```http
+GET /api/public/project/{id}
+```
+
+### 🎯 Compétences (Routes publiques)
+
+#### Liste des compétences
+```http
+GET /api/public/skills
+```
+
+#### Détail d'une compétence
+```http
+GET /api/public/skill/{id}
+```
+
+### 👨‍💼 Administration (Routes protégées)
+
+Toutes les routes admin nécessitent un token d'authentification.
+
+#### Gestion des projets
+```http
+POST /api/admin/projects          # Créer un projet
+PUT /api/admin/project/{id}       # Modifier un projet
+DELETE /api/admin/project/{id}    # Supprimer un projet
+```
+
+#### Gestion des compétences
+```http
+POST /api/admin/skills            # Créer une compétence
+PUT /api/admin/skill/{id}         # Modifier une compétence
+DELETE /api/admin/skill/{id}      # Supprimer une compétence
+```
+
+#### Gestion des utilisateurs
+```http
+GET /api/users                    # Liste des utilisateurs
+GET /api/users/{id}               # Détail d'un utilisateur
+PUT /api/users/{id}               # Modifier un utilisateur
+DELETE /api/users/{id}            # Supprimer un utilisateur
+```
+
+## 🔧 Configuration
+
+### Utilisateur admin par défaut
+
+- **Email** : `abderrahmanahlalay76@gmail.com`
+- **Mot de passe** : `wxcvbn@@@@0000`
+
+### Variables d'environnement importantes
+
+```env
+APP_NAME="Portfolio API"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+
+SANCTUM_STATEFUL_DOMAINS=localhost:3000
+```
+
+## 🧪 Tests
+
+```bash
+# Lancer les tests
+php artisan test
+
+# Tests avec couverture
+php artisan test --coverage
+```
+
+## 📦 Scripts disponibles
+
+```bash
+# Développement (serveur + queue + logs + vite)
+composer run dev
+
+# Tests
+composer run test
+
+# Linting
+./vendor/bin/pint
+```
+
+## 🚀 Déploiement
+
+### Production
+
+1. **Configuration**
+```bash
+APP_ENV=production
+APP_DEBUG=false
+```
+
+2. **Optimisation**
+```bash
+composer install --optimize-autoloader --no-dev
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+3. **Permissions**
+```bash
+chmod -R 755 storage bootstrap/cache
+```
+
+## 📝 Structure des réponses API
+
+### Succès
+```json
+{
+    "message": "Message de succès",
+    "data": { ... },
+    "status": "success"
+}
+```
+
+### Erreur
+```json
+{
+    "message": "Message d'erreur",
+    "error": "Détails de l'erreur",
+    "status": "failed"
+}
+```
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche feature (`git checkout -b feature/nouvelle-fonctionnalite`)
+3. Commit les changements (`git commit -m 'Ajouter nouvelle fonctionnalité'`)
+4. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
+5. Ouvrir une Pull Request
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+
+## 👨‍💻 Auteur
+
+**Abderrahman Ahlalay**
+- Email: abderrahmanahlalay76@gmail.com
+
+---
+
+*Développé avec ❤️ en Laravel*
