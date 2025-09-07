@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->enum('type',['hard skill', 'soft skill']);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
